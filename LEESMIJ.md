@@ -2,6 +2,12 @@
 
 De site gebruikt Netlify Functions en Blobs, dus hij moet via GitHub naar Netlify (slepen naar Netlify Drop werkt niet).
 
+## De site bijwerken (als hij al live staat)
+1. Open de repository op github.com en kies **Add file > Upload files**.
+2. Sleep de mappen `public` en `netlify` en de losse bestanden erin (op een computer, zodat de mappen behouden blijven) en klik **Commit changes**. Bestaande bestanden worden overschreven.
+3. Netlify bouwt de site binnen een minuut opnieuw. Stukken, teksten en foto's uit het beheer blijven bewaard.
+4. Ga daarna naar `/beheer` > **Etsy en controle** en klik **Vertalingen bijwerken**.
+
 ## 1. Op GitHub zetten
 1. Maak op github.com een nieuwe **privé** repository, bijvoorbeeld `vanwijngaardenantiques`.
 2. Klik **uploading an existing file** en sleep de inhoud van deze map erin (`public`, `netlify`, `netlify.toml`, `package.json`, `LEESMIJ.md`). Doe dit op een computer, zodat de mappen behouden blijven.
@@ -47,5 +53,16 @@ Teksten die je in het beheer zelf hebt aangepast, worden door geen van beide ove
 
 Bij stukken uit het CSV-bestand linkt de knop naar een zoekopdracht in de Etsy-winkel, want het bestand bevat geen artikellink. Plak zo nodig de directe link bij het stuk. Met de Etsy-sleutel gaat dat vanzelf goed.
 
+## Talen
+De site is er in het Nederlands, Engels, Duits, Frans, Italiaans en Spaans. Een bezoeker krijgt automatisch de taal van zijn browser; bij een andere taal is dat Engels. Bovenaan kan hij zelf wisselen, en die keuze wordt onthouden. Elke taal heeft een eigen adres, bijvoorbeeld `/fr/collectie`.
+
+- **Vaste teksten**: bij **Teksten** kies je bovenaan de taal. Voor elke taal staat een standaardvertaling klaar. Pas je de Nederlandse tekst aan, klik dan per taal op **Vertalen vanuit het Nederlands**, lees na en sla op.
+- **Stukken**: Gemini vertaalt titels en omschrijvingen via **Etsy en controle > Vertalingen bijwerken**. Verandert de Nederlandse tekst van een stuk, dan staat het daar opnieuw in de wachtrij. Met de Etsy-sleutel gebeurt het vertalen elke nacht vanzelf.
+- **Verbeteren**: open een stuk en klap **Vertalingen nalezen of verbeteren** uit.
+- Zolang een stuk nog niet vertaald is, zien bezoekers de Engelse of anders de Nederlandse titel.
+
+## Etsy Share & Save
+Alle knoppen naar Etsy gebruiken de vorm `rientsporselein.etsy.com/...`. Alleen links in die vorm tellen mee voor de teruggave van Etsy. Meld de winkel eenmalig aan: Etsy > Shop Manager > Marketing > Share & Save.
+
 ## Vindbaarheid
-De site maakt zelf `/sitemap.xml` en `/robots.txt`. Meld de sitemap na livegang aan in Google Search Console.
+De site maakt zelf `/sitemap.xml` (met alle taalversies) en `/robots.txt`. Meld de sitemap na livegang aan in Google Search Console.

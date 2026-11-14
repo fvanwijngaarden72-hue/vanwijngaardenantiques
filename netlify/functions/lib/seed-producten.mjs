@@ -11,7 +11,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4534536501",
 "prijs": 44.99,
 "status": "beschikbaar",
-"uitgelicht": true
+"uitgelicht": true,
+"i18n": {
+"en": {
+"titel": "Bluebirds cream set",
+"omschrijving": ""
+},
+"de": {
+"titel": "Bluebirds Milch- und Zuckerset",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1857557923",
@@ -25,7 +35,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1857557923",
 "prijs": 19.99,
 "status": "beschikbaar",
-"uitgelicht": true
+"uitgelicht": true,
+"i18n": {
+"en": {
+"titel": "Carlton individual plates",
+"omschrijving": ""
+},
+"de": {
+"titel": "Carlton Einzelteller",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1819792819",
@@ -39,7 +59,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1819792819",
 "prijs": 49.99,
 "status": "beschikbaar",
-"uitgelicht": true
+"uitgelicht": true,
+"i18n": {
+"en": {
+"titel": "Easy/Marisca soup bowls",
+"omschrijving": ""
+},
+"de": {
+"titel": "Easy/Marisca Suppenschalen",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1868026860",
@@ -53,7 +83,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1868026860",
 "prijs": 149.98,
 "status": "beschikbaar",
-"uitgelicht": true
+"uitgelicht": true,
+"i18n": {
+"en": {
+"titel": "Maria \"Mismatch\" coffee/tea set (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Maria „Mismatch“ Kaffee-/Teeservice (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1882194437",
@@ -67,7 +107,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1882194437",
 "prijs": 119.99,
 "status": "beschikbaar",
-"uitgelicht": true
+"uitgelicht": true,
+"i18n": {
+"en": {
+"titel": "Tipo Weiss coffee/tea set (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Tipo Weiss Kaffee-/Teeservice (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1811100036",
@@ -81,7 +131,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1811100036",
 "prijs": 34.99,
 "status": "beschikbaar",
-"uitgelicht": true
+"uitgelicht": true,
+"i18n": {
+"en": {
+"titel": "Botanica bonbonnière (large and medium)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Botanica Bonbonniere (groß und mittel)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1882168155",
@@ -95,7 +155,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1882168155",
 "prijs": 44.99,
 "status": "beschikbaar",
-"uitgelicht": true
+"uitgelicht": true,
+"i18n": {
+"en": {
+"titel": "Romantica cream set",
+"omschrijving": ""
+},
+"de": {
+"titel": "Romantica Milch- und Zuckerset",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1867973832",
@@ -109,7 +179,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1867973832",
 "prijs": 44.99,
 "status": "beschikbaar",
-"uitgelicht": true
+"uitgelicht": true,
+"i18n": {
+"en": {
+"titel": "Asimmetria Blütenlese cream set",
+"omschrijving": ""
+},
+"de": {
+"titel": "Asimmetria Blütenlese Milch- und Zuckerset",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1791076725",
@@ -123,7 +203,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1791076725",
 "prijs": 30.0,
 "status": "beschikbaar",
-"uitgelicht": true
+"uitgelicht": true,
+"i18n": {
+"en": {
+"titel": "Naif individual cups",
+"omschrijving": ""
+},
+"de": {
+"titel": "Naif Einzeltassen",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4532931047",
@@ -137,7 +227,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4532931047",
 "prijs": 349.95,
 "status": "beschikbaar",
-"uitgelicht": true
+"uitgelicht": true,
+"i18n": {
+"en": {
+"titel": "Bon Appetit breakfast set (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Bon Appetit Frühstücksset (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1361599863",
@@ -151,7 +251,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1361599863",
 "prijs": 30.0,
 "status": "beschikbaar",
-"uitgelicht": true
+"uitgelicht": true,
+"i18n": {
+"en": {
+"titel": "Coffee cups and breakfast sets (2 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Kaffeetassen und Frühstückssets (2 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1496504968",
@@ -165,7 +275,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1496504968",
 "prijs": 94.99,
 "status": "beschikbaar",
-"uitgelicht": true
+"uitgelicht": true,
+"i18n": {
+"en": {
+"titel": "Cobalt blue coffee set (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Kobaltblaues Kaffeeservice (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4578993322",
@@ -179,7 +299,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4578993322",
 "prijs": 30.0,
 "status": "beschikbaar",
-"uitgelicht": true
+"uitgelicht": true,
+"i18n": {
+"en": {
+"titel": "Edme serving bowls and platters",
+"omschrijving": ""
+},
+"de": {
+"titel": "Edme Schalen und Platten",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4328677181",
@@ -193,7 +323,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4328677181",
 "prijs": 224.97,
 "status": "beschikbaar",
-"uitgelicht": true
+"uitgelicht": true,
+"i18n": {
+"en": {
+"titel": "Naif tea set (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Naif Teeservice (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1906217277",
@@ -207,7 +347,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1906217277",
 "prijs": 25.0,
 "status": "beschikbaar",
-"uitgelicht": true
+"uitgelicht": true,
+"i18n": {
+"en": {
+"titel": "Switch 3 mugs and soup bowls",
+"omschrijving": ""
+},
+"de": {
+"titel": "Switch 3 Becher und Suppenschalen",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1881447257",
@@ -221,7 +371,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1881447257",
 "prijs": 294.96,
 "status": "beschikbaar",
-"uitgelicht": true
+"uitgelicht": true,
+"i18n": {
+"en": {
+"titel": "Heinrich Summer Dreams tea set (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Heinrich Summer Dreams Teeservice (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4393535174",
@@ -235,7 +395,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4393535174",
 "prijs": 34.99,
 "status": "beschikbaar",
-"uitgelicht": true
+"uitgelicht": true,
+"i18n": {
+"en": {
+"titel": "Edme tiered stand and cake plate",
+"omschrijving": ""
+},
+"de": {
+"titel": "Edme Etagere und Tortenplatte",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1858208772",
@@ -249,7 +419,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1858208772",
 "prijs": 34.99,
 "status": "beschikbaar",
-"uitgelicht": true
+"uitgelicht": true,
+"i18n": {
+"en": {
+"titel": "Windsor café au lait cup with saucer",
+"omschrijving": ""
+},
+"de": {
+"titel": "Windsor Café-au-lait-Tasse mit Untertasse",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1878736939",
@@ -263,7 +443,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1878736939",
 "prijs": 10.0,
 "status": "beschikbaar",
-"uitgelicht": true
+"uitgelicht": true,
+"i18n": {
+"en": {
+"titel": "Edme individual plates",
+"omschrijving": ""
+},
+"de": {
+"titel": "Edme Einzelteller",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1852582340",
@@ -277,7 +467,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1852582340",
 "prijs": 15.0,
 "status": "beschikbaar",
-"uitgelicht": true
+"uitgelicht": true,
+"i18n": {
+"en": {
+"titel": "Edme egg cups",
+"omschrijving": ""
+},
+"de": {
+"titel": "Edme Eierbecher",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1812805801",
@@ -291,7 +491,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1812805801",
 "prijs": 89.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "April Flowers mocha/espresso service (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "April Flowers Mokka-/Espressoservice (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1798593946",
@@ -305,7 +515,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1798593946",
 "prijs": 134.98,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Vincent tea/coffee set (8 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Vincent Tee-/Kaffeeservice (8 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1798579000",
@@ -319,7 +539,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1798579000",
 "prijs": 94.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Coffee/tea set (8 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Kaffee-/Teeservice (8 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1680068881",
@@ -333,7 +563,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1680068881",
 "prijs": 59.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Tea/coffee set (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Tee-/Kaffeeservice (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4300463486",
@@ -347,7 +587,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4300463486",
 "prijs": 49.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Edme Rosalind milk and cream jug",
+"omschrijving": ""
+},
+"de": {
+"titel": "Edme Rosalind Milch- und Sahnekännchen",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4489636509",
@@ -361,7 +611,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4489636509",
 "prijs": 224.97,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Casa Look coffee/tea set (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Casa Look Kaffee-/Teeservice (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1804687691",
@@ -375,7 +635,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1804687691",
 "prijs": 224.97,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Rotunda coffee/tea set (6 pers.), cobalt blue",
+"omschrijving": ""
+},
+"de": {
+"titel": "Rotunda Kaffee-/Teeservice (6 Pers.), kobaltblau",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1901212333",
@@ -389,7 +659,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1901212333",
 "prijs": 164.97,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Edme coffee set (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Edme Kaffeeservice (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1587436144",
@@ -403,7 +683,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1587436144",
 "prijs": 164.97,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Midnight Form 1495 tea set (8 pers.), anniversary edition",
+"omschrijving": ""
+},
+"de": {
+"titel": "Midnight Form 1495 Teeservice (8 Pers.), Jubiläumsedition",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1652509598",
@@ -417,7 +707,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1652509598",
 "prijs": 59.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Set of coffee cups (8 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Kaffeetassen-Set (8 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1816877694",
@@ -431,7 +731,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1816877694",
 "prijs": 244.97,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Switch 3 coffee/tea set (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Switch 3 Kaffee-/Teeservice (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1785460586",
@@ -445,7 +755,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1785460586",
 "prijs": 194.97,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Citta Campagna Desco coffee/tea set (8 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Citta Campagna Desco Kaffee-/Teeservice (8 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1720324696",
@@ -459,7 +779,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1720324696",
 "prijs": 104.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Coffee set (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Kaffeeservice (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4373470215",
@@ -473,7 +803,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4373470215",
 "prijs": 179.97,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Green Garland mocha/espresso set (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Green Garland Mokka-/Espressoset (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1675791417",
@@ -487,7 +827,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1675791417",
 "prijs": 19.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Citta Campagna Castellina cups and cream set",
+"omschrijving": ""
+},
+"de": {
+"titel": "Citta Campagna Castellina Tassen, Milch- und Zuckerset",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4300451425",
@@ -501,7 +851,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4300451425",
 "prijs": 30.0,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Naif bonbonnière",
+"omschrijving": ""
+},
+"de": {
+"titel": "Naif Bonbonniere",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4393527509",
@@ -515,7 +875,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4393527509",
 "prijs": 44.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Sugar bowl / jam jar",
+"omschrijving": ""
+},
+"de": {
+"titel": "Zuckerdose / Marmeladendose",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1787901490",
@@ -529,7 +899,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1787901490",
 "prijs": 19.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Botanica coasters",
+"omschrijving": ""
+},
+"de": {
+"titel": "Botanica Untersetzer",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1864688748",
@@ -543,7 +923,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1864688748",
 "prijs": 64.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Switch 1 Ava oven dish",
+"omschrijving": ""
+},
+"de": {
+"titel": "Switch 1 Ava Auflaufform",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4310447982",
@@ -557,7 +947,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4310447982",
 "prijs": 30.0,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Mariposa individual cups",
+"omschrijving": ""
+},
+"de": {
+"titel": "Mariposa Einzeltassen",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1803704313",
@@ -571,7 +971,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1803704313",
 "prijs": 25.0,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Botanica mocha/espresso cups",
+"omschrijving": ""
+},
+"de": {
+"titel": "Botanica Mokka-/Espressotassen",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4345697772",
@@ -585,7 +995,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4345697772",
 "prijs": 16.5,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Petit Fleur individual cups",
+"omschrijving": ""
+},
+"de": {
+"titel": "Petit Fleur Einzeltassen",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1817384198",
@@ -599,7 +1019,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1817384198",
 "prijs": 39.49,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Farmhouse Touch Blueflowers storage jar",
+"omschrijving": ""
+},
+"de": {
+"titel": "Farmhouse Touch Blueflowers Vorratsdose",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1878756997",
@@ -613,7 +1043,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1878756997",
 "prijs": 74.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Edme covered dish and sauce boat",
+"omschrijving": ""
+},
+"de": {
+"titel": "Edme Deckelterrine und Sauciere",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4300445392",
@@ -627,7 +1067,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4300445392",
 "prijs": 16.5,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Windsor individual cups",
+"omschrijving": ""
+},
+"de": {
+"titel": "Windsor Einzeltassen",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1906210967",
@@ -641,7 +1091,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1906210967",
 "prijs": 25.0,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Switch 3 individual tableware pieces",
+"omschrijving": ""
+},
+"de": {
+"titel": "Switch 3 Einzelteile",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1823539637",
@@ -655,7 +1115,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1823539637",
 "prijs": 159.98,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Windsor breakfast set (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Windsor Frühstücksset (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1878767979",
@@ -669,7 +1139,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1878767979",
 "prijs": 19.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Switch 1 deep plates",
+"omschrijving": ""
+},
+"de": {
+"titel": "Switch 1 Suppenteller",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1864674718",
@@ -683,7 +1163,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1864674718",
 "prijs": 15.0,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Switch 1 individual plates",
+"omschrijving": ""
+},
+"de": {
+"titel": "Switch 1 Einzelteller",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4310414076",
@@ -697,7 +1187,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4310414076",
 "prijs": 30.0,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Botanica individual plates",
+"omschrijving": ""
+},
+"de": {
+"titel": "Botanica Einzelteller",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1849059479",
@@ -711,7 +1211,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1849059479",
 "prijs": 30.0,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Switch 3 individual plates",
+"omschrijving": ""
+},
+"de": {
+"titel": "Switch 3 Einzelteller",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1824554576",
@@ -725,7 +1235,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1824554576",
 "prijs": 19.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Citta Campagna Castellina individual plates",
+"omschrijving": ""
+},
+"de": {
+"titel": "Citta Campagna Castellina Einzelteller",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4443085996",
@@ -739,7 +1259,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4443085996",
 "prijs": 19.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Flying Object individual tableware pieces",
+"omschrijving": ""
+},
+"de": {
+"titel": "Flying Object Einzelteile",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1790001640",
@@ -753,7 +1283,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1790001640",
 "prijs": 19.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "A la Ferme and Au Jardin individual plates",
+"omschrijving": ""
+},
+"de": {
+"titel": "A la Ferme und Au Jardin Einzelteller",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1657604339",
@@ -767,7 +1307,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1657604339",
 "prijs": 97.49,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Studio-Line Composition Jardinet dinner plates (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Studio-Line Composition Jardinet Speiseteller (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1805590410",
@@ -781,7 +1331,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1805590410",
 "prijs": 44.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Easy/Marisca individual plates",
+"omschrijving": ""
+},
+"de": {
+"titel": "Easy/Marisca Einzelteller",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4502500793",
@@ -795,7 +1355,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4502500793",
 "prijs": 25.0,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Provence deep plates",
+"omschrijving": ""
+},
+"de": {
+"titel": "Provence Suppenteller",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1867991846",
@@ -809,7 +1379,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1867991846",
 "prijs": 17.5,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Sanssouci Grüne Blume individual plates",
+"omschrijving": ""
+},
+"de": {
+"titel": "Sanssouci Grüne Blume Einzelteller",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4329587788",
@@ -823,7 +1403,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4329587788",
 "prijs": 15.0,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Summerday individual plates",
+"omschrijving": ""
+},
+"de": {
+"titel": "Summerday Einzelteller",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1847471939",
@@ -837,7 +1427,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1847471939",
 "prijs": 94.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Manoir pasta set (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Manoir Pastaservice (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1906195325",
@@ -851,7 +1451,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1906195325",
 "prijs": 15.0,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Switch 3 soup and pasta plates",
+"omschrijving": ""
+},
+"de": {
+"titel": "Switch 3 Suppen- und Pastateller",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1620064027",
@@ -865,7 +1475,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1620064027",
 "prijs": 79.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Dessina Celia dinner plates (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Dessina Celia Speiseteller (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4502499854",
@@ -879,7 +1499,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4502499854",
 "prijs": 44.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Provence charger plate",
+"omschrijving": ""
+},
+"de": {
+"titel": "Provence Platzteller",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4535702596",
@@ -893,7 +1523,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4535702596",
 "prijs": 25.0,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Tipo Adeline deep plate",
+"omschrijving": ""
+},
+"de": {
+"titel": "Tipo Adeline Suppenteller",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1857147482",
@@ -907,7 +1547,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1857147482",
 "prijs": 89.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Fürstin coffee pot and cream set, Goldring",
+"omschrijving": ""
+},
+"de": {
+"titel": "Fürstin Kaffeekanne mit Milch- und Zuckerset, Goldring",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1737140075",
@@ -921,7 +1571,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1737140075",
 "prijs": 124.98,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Quadrants teapot and cream set",
+"omschrijving": ""
+},
+"de": {
+"titel": "Quadrants Teekanne mit Milch- und Zuckerset",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4310501060",
@@ -935,7 +1595,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4310501060",
 "prijs": 34.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Herrenhausen cream set",
+"omschrijving": ""
+},
+"de": {
+"titel": "Herrenhausen Milch- und Zuckerset",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4310484985",
@@ -949,7 +1619,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4310484985",
 "prijs": 44.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Palatino cream set",
+"omschrijving": ""
+},
+"de": {
+"titel": "Palatino Milch- und Zuckerset",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4381463479",
@@ -963,7 +1643,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4381463479",
 "prijs": 84.98,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Petit Fleur teapot",
+"omschrijving": ""
+},
+"de": {
+"titel": "Petit Fleur Teekanne",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4345716718",
@@ -977,7 +1667,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4345716718",
 "prijs": 34.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Switch 3 teapot and warmer",
+"omschrijving": ""
+},
+"de": {
+"titel": "Switch 3 Teekanne und Stövchen",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4300494972",
@@ -991,7 +1691,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4300494972",
 "prijs": 25.0,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Windsor teapot",
+"omschrijving": ""
+},
+"de": {
+"titel": "Windsor Teekanne",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4361524705",
@@ -1005,7 +1715,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4361524705",
 "prijs": 34.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Palermo teapot",
+"omschrijving": ""
+},
+"de": {
+"titel": "Palermo Teekanne",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4361507095",
@@ -1019,7 +1739,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4361507095",
 "prijs": 74.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Aida Paradiesgarten teapot",
+"omschrijving": ""
+},
+"de": {
+"titel": "Aida Paradiesgarten Teekanne",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4380473741",
@@ -1033,7 +1763,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4380473741",
 "prijs": 25.0,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Botanica teapot",
+"omschrijving": ""
+},
+"de": {
+"titel": "Botanica Teekanne",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4342145515",
@@ -1047,7 +1787,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4342145515",
 "prijs": 74.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Coco White teapot by Günther Wunderlich",
+"omschrijving": ""
+},
+"de": {
+"titel": "Coco White Teekanne von Günther Wunderlich",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4401710705",
@@ -1061,7 +1811,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4401710705",
 "prijs": 44.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Exotica cream set",
+"omschrijving": ""
+},
+"de": {
+"titel": "Exotica Milch- und Zuckerset",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4401621877",
@@ -1075,7 +1835,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4401621877",
 "prijs": 34.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Summerday coffee pot",
+"omschrijving": ""
+},
+"de": {
+"titel": "Summerday Kaffeekanne",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4535669265",
@@ -1089,7 +1859,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4535669265",
 "prijs": 64.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Dessina Celia teapot",
+"omschrijving": ""
+},
+"de": {
+"titel": "Dessina Celia Teekanne",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1401701670",
@@ -1103,7 +1883,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1401701670",
 "prijs": 30.0,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Louvre breakfast set",
+"omschrijving": ""
+},
+"de": {
+"titel": "Louvre Frühstücksgedeck",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1737547299",
@@ -1117,7 +1907,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1737547299",
 "prijs": 30.0,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Change Memphis breakfast set",
+"omschrijving": ""
+},
+"de": {
+"titel": "Change Memphis Frühstücksgedeck",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4498628424",
@@ -1131,7 +1931,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4498628424",
 "prijs": 34.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Summerday breakfast set",
+"omschrijving": ""
+},
+"de": {
+"titel": "Summerday Frühstücksgedeck",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4435551972",
@@ -1145,7 +1955,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4435551972",
 "prijs": 37.5,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Studio-Line Berlin breakfast trio",
+"omschrijving": ""
+},
+"de": {
+"titel": "Studio-Line Berlin Frühstücksgedeck (Trio)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1793877281",
@@ -1159,7 +1979,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1793877281",
 "prijs": 59.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Monaco cake set (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Monaco Kuchenservice (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4345754498",
@@ -1173,7 +2003,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4345754498",
 "prijs": 74.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Rosette cake set (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Rosette Kuchenservice (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1847420653",
@@ -1187,7 +2027,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1847420653",
 "prijs": 12.5,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Manoir cake plate",
+"omschrijving": ""
+},
+"de": {
+"titel": "Manoir Kuchenteller",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1793894907",
@@ -1201,7 +2051,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1793894907",
 "prijs": 109.98,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Sanssouci Graue Rose cake plates (12 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Sanssouci Graue Rose Kuchenteller (12 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4350171301",
@@ -1215,7 +2075,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4350171301",
 "prijs": 164.97,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Kutani Crane cake set (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Kutani Crane Kuchenservice (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4405888666",
@@ -1229,7 +2099,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4405888666",
 "prijs": 19.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Molière pastry dishes",
+"omschrijving": ""
+},
+"de": {
+"titel": "Molière Gebäckschalen",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4402253760",
@@ -1243,7 +2123,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4402253760",
 "prijs": 44.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Leaf-shaped dish with handle",
+"omschrijving": ""
+},
+"de": {
+"titel": "Blattschale mit Henkel",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1842492080",
@@ -1257,7 +2147,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1842492080",
 "prijs": 15.0,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Botanica egg cups and salt and pepper set",
+"omschrijving": ""
+},
+"de": {
+"titel": "Botanica Eierbecher und Salz- und Pfefferstreuer",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4432037158",
@@ -1271,7 +2171,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4432037158",
 "prijs": 159.98,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Flying Object breakfast set (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Flying Object Frühstücksset (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1889155369",
@@ -1285,7 +2195,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1889155369",
 "prijs": 89.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Tipo Weiss egg cups (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Tipo Weiss Eierbecher (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1760977949",
@@ -1299,7 +2219,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1760977949",
 "prijs": 109.98,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Botanica breakfast set (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Botanica Frühstücksset (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4405853129",
@@ -1313,7 +2243,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4405853129",
 "prijs": 17.5,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Rosette footed egg cups",
+"omschrijving": ""
+},
+"de": {
+"titel": "Rosette Eierbecher mit Fuß",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1819920779",
@@ -1327,7 +2267,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1819920779",
 "prijs": 44.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Maria Weiss egg cups (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Maria Weiss Eierbecher (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1794964978",
@@ -1341,7 +2291,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1794964978",
 "prijs": 44.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Flower vase with lid",
+"omschrijving": ""
+},
+"de": {
+"titel": "Blumenvase mit Deckel",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1791452614",
@@ -1355,7 +2315,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1791452614",
 "prijs": 84.98,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Flower vase, hand-painted",
+"omschrijving": ""
+},
+"de": {
+"titel": "Blumenvase, handbemalt",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1785503264",
@@ -1369,7 +2339,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1785503264",
 "prijs": 74.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Jeannette vases, genuine cobalt with gold",
+"omschrijving": ""
+},
+"de": {
+"titel": "Jeannette Vasen, Echt Kobalt mit Gold",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1853882059",
@@ -1383,7 +2363,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1853882059",
 "prijs": 25.0,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Edme vase and candlestick",
+"omschrijving": ""
+},
+"de": {
+"titel": "Edme Vase und Kerzenhalter",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1542914791",
@@ -1397,7 +2387,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1542914791",
 "prijs": 64.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Sanssouci trumpet vase",
+"omschrijving": ""
+},
+"de": {
+"titel": "Sanssouci Trompetenvase",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4345752430",
@@ -1411,7 +2411,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4345752430",
 "prijs": 54.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Flower vase",
+"omschrijving": ""
+},
+"de": {
+"titel": "Blumenvase",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4342130431",
@@ -1425,7 +2435,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4342130431",
 "prijs": 44.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Vase from Selb-Plössberg",
+"omschrijving": ""
+},
+"de": {
+"titel": "Vase aus Selb-Plößberg",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4342122224",
@@ -1439,7 +2459,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4342122224",
 "prijs": 74.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Vase set",
+"omschrijving": ""
+},
+"de": {
+"titel": "Vasenset",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1418964344",
@@ -1453,7 +2483,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1418964344",
 "prijs": 74.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Vivaldi vase and serving dish",
+"omschrijving": ""
+},
+"de": {
+"titel": "Vivaldi Vase und Servierschale",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4499930002",
@@ -1467,7 +2507,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4499930002",
 "prijs": 15.0,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Provence candlestick",
+"omschrijving": ""
+},
+"de": {
+"titel": "Provence Kerzenhalter",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1538849075",
@@ -1481,7 +2531,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1538849075",
 "prijs": 74.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Porcelain figurine, man with macaw",
+"omschrijving": ""
+},
+"de": {
+"titel": "Porzellanfigur, Mann mit Ara",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1529187869",
@@ -1495,7 +2555,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1529187869",
 "prijs": 149.98,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Duchesse bowl and 2 candlesticks",
+"omschrijving": ""
+},
+"de": {
+"titel": "Duchesse Schale und 2 Kerzenleuchter",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1486919405",
@@ -1509,7 +2579,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1486919405",
 "prijs": 74.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Ceramic vase 7014-15 (West Germany)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Keramikvase 7014-15 (West Germany)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4491055251",
@@ -1523,7 +2603,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4491055251",
 "prijs": 9.5,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Mariposa individual plates (second choice)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Mariposa Einzelteller (2. Wahl)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "1394435456",
@@ -1537,7 +2627,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/1394435456",
 "prijs": 44.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Tea set (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Teeservice (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4443147207",
@@ -1551,7 +2651,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4443147207",
 "prijs": 30.0,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Adriana White soup bowls (3 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Adriana White Suppenschalen (3 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4498643668",
@@ -1565,7 +2675,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4498643668",
 "prijs": 49.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Summerday dinner plates second choice (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Summerday Speiseteller 2. Wahl (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4565368607",
@@ -1579,7 +2699,17 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4565368607",
 "prijs": 89.99,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Provence bowls second choice (6 pers.)",
+"omschrijving": ""
+},
+"de": {
+"titel": "Provence Schalen 2. Wahl (6 Pers.)",
+"omschrijving": ""
+}
+}
 },
 {
 "id": "4491600079",
@@ -1593,6 +2723,16 @@ export const SEED_PRODUCTEN = [
 "etsyUrl": "https://www.etsy.com/listing/4491600079",
 "prijs": 10.0,
 "status": "beschikbaar",
-"uitgelicht": false
+"uitgelicht": false,
+"i18n": {
+"en": {
+"titel": "Citta Campagna Desco individual plates second choice",
+"omschrijving": ""
+},
+"de": {
+"titel": "Citta Campagna Desco Einzelteller 2. Wahl",
+"omschrijving": ""
+}
+}
 }
 ];

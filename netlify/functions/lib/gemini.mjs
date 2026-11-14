@@ -28,14 +28,14 @@ export function kiesUitLijst(soort, lijst) {
   return l.sort().reverse();
 }
 
-async function vraag(soort, parts, generationConfig) {
+async function vraag(soort, parts, generationConfig, wachttijd = 50000) {
   const key = sleutel();
   const geprobeerd = new Set();
   let laatste = "";
   const probeer = async (m) => {
     geprobeerd.add(m);
     const r = await fetch(BASIS + "/" + m + ":generateContent", {
-      method: "POST", signal: AbortSignal.timeout(50000),
+      method: "POST", signal: AbortSignal.timeout(wachttijd),
       headers: { "content-type": "application/json", "x-goog-api-key": key },
       body: JSON.stringify({ contents: [{ role: "user", parts }], generationConfig }),
     });
@@ -58,10 +58,10 @@ async function vraag(soort, parts, generationConfig) {
 }
 export const gebruiktModel = (soort) => werkend[soort] || null;
 
-export async function tekstJson(prompt, foto) {
+export async function tekstJson(prompt, foto, wachttijd) {
   const parts = [{ text: prompt }];
   if (foto) parts.push({ inlineData: foto });
-  const uit = await vraag("tekst", parts, { responseMimeType: "application/json" });
+  const uit = await vraag("tekst", parts, { responseMimeType: "application/json" }, wachttijd);
   const t = uit.map((p) => p.text || "").join("").replace(/^```(?:json)?\s*|\s*```$/g, "");
   try { return JSON.parse(t); } catch { throw new Error("Gemini gaf geen bruikbaar antwoord. Probeer het nog eens."); }
 }

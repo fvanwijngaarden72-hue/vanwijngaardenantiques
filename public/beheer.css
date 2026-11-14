@@ -31,3 +31,4 @@ h3{font:600 18px "Hanken Grotesk",sans-serif;margin:0}
 .controle .goed::before{content:"\2713";color:#1c7a3c}.controle .mis::before{content:"\2717";color:#a3201c}.controle .nvt::before{content:"\2013";color:var(--grijs)}
 .controle .mis{color:#a3201c}
 [hidden]{display:none!important}
+details{border:1px solid var(--lijn);border-radius:6px;padding:10px 12px}details>*+*{margin-top:10px}summary{cursor:pointer;font-weight:600;font-size:14px}

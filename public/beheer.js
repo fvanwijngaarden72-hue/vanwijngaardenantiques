@@ -32,6 +32,7 @@ const TABS = [["stukken", "Stukken"], ["studio", "Foto Studio"], ["insta", "Inst
 function kies(t) { tab = t; $("#tabs").innerHTML = TABS.map(([i, n]) => `<button data-t="${i}" ${i === t ? 'aria-current="page"' : ""}>${n}</button>`).join(""); ({ stukken, studio: toonStudio, insta: toonInsta, teksten, sfeer, koppel })[t](); scrollTo(0, 0); }
 $("#tabs").onclick = (e) => { const b = e.target.closest("button"); if (b) kies(b.dataset.t); };
 const P = () => $("#paneel");
+const TALEN = [["en", "Engels"], ["de", "Duits"], ["fr", "Frans"], ["it", "Italiaans"], ["es", "Spaans"]];
 
 /* ---------- Stukken ---------- */
 let fz = "", fc = "";
@@ -56,19 +57,28 @@ function formulier(p) {
   <label>Foto kiezen<input type="file" name="bestand" accept="image/*"></label>
   <label>Merk<input name="merk" value="${h(p.merk)}"></label><label>Titel<input name="titel" value="${h(p.titel)}" required></label>
   <label>Omschrijving<textarea name="omschrijving">${h(p.omschrijving)}</textarea></label>
+  ${p.id ? `<details id="vd"><summary>Vertalingen nalezen of verbeteren</summary><p class="hulp">Gemini maakt de vertalingen bij ‘Etsy en controle’. Pas je hierboven de Nederlandse tekst aan, dan wordt het stuk daar opnieuw vertaald.</p><label>Taal<select id="vtaal">${TALEN.map(([c, n]) => `<option value="${c}">${n}</option>`).join("")}</select></label><label>Titel in deze taal<input id="vtitel"></label><label>Omschrijving in deze taal<textarea id="vomschr"></textarea></label></details>` : ""}
   <label>Link naar Etsy<input name="etsyUrl" type="url" placeholder="https://www.etsy.com/listing/..." value="${h(p.etsyUrl)}"></label>
   <div class="rij"><label style="flex:1">Categorie<select name="categorie">${catOpties(p.categorie)}</select></label><label style="flex:1">Status<select name="status">${["beschikbaar", "verkocht", "verborgen"].map((s) => `<option ${s === p.status ? "selected" : ""}>${s}</option>`).join("")}</select></label><label style="flex:1">Prijs (euro)<input name="prijs" type="number" step="0.01" min="0" value="${p.prijs ?? ""}"></label></div>
   <label><input type="checkbox" name="uitgelicht" ${p.uitgelicht ? "checked" : ""}>Tonen op de homepage</label>
   <div class="rij"><button class="k" value="ok" id="opsl">Opslaan</button><button class="k l" value="x" formnovalidate>Annuleren</button>${p.id ? `<button type="button" class="k l" id="naarS">Foto Studio</button><button type="button" class="k l" id="naarI">Instagram</button><button type="button" class="k r" id="wis">Verwijderen</button>` : ""}</div></form>`;
   document.body.append(d); d.showModal();
   const f = $("form", d);
+  let vert = null; const vGewijzigd = new Set();
+  if (p.id) {
+    const toon = () => { const v = vert[$("#vtaal", d).value]; $("#vtitel", d).value = v.titel; $("#vomschr", d).value = v.omschrijving; };
+    $("#vd", d).ontoggle = async () => { if (!$("#vd", d).open || vert) return; try { vert = await api("vertaling-lezen", { id: p.id }); toon(); } catch (e) { toast(e.message); } };
+    $("#vtaal", d).onchange = () => vert && toon();
+    for (const [id, veld] of [["#vtitel", "titel"], ["#vomschr", "omschrijving"]]) $(id, d).oninput = (e) => { if (!vert) return; const t = $("#vtaal", d).value; vert[t][veld] = e.target.value; vGewijzigd.add(t); };
+  }
   f.onsubmit = (e) => {
     if (e.submitter?.value !== "ok") return; e.preventDefault();
     bezig(e.submitter, async () => {
       const v = Object.fromEntries(new FormData(f));
       let foto = p.foto;
       if (f.bestand.files[0]) foto = (await api("foto-upload", { foto: await verklein(f.bestand.files[0]) })).url;
-      const r = await api("product-opslaan", { product: { ...p, ...v, bestand: undefined, foto, uitgelicht: f.uitgelicht.checked } });
+      const i18n = vGewijzigd.size ? Object.fromEntries([...vGewijzigd].map((t) => [t, vert[t]])) : undefined;
+      const r = await api("product-opslaan", { product: { ...p, ...v, bestand: undefined, foto, uitgelicht: f.uitgelicht.checked, i18n } });
       const i = D.producten.findIndex((x) => x.id === r.product.id);
       if (i >= 0) D.producten[i] = r.product; else D.producten.unshift(r.product);
       d.close(); d.remove(); toast("Opgeslagen"); if (tab === "stukken") stukken();
@@ -172,10 +182,16 @@ function toonInsta() {
 
 /* ---------- Teksten ---------- */
 const VELDEN = [["heroTitel", "Homepage: grote titel"], ["heroTekst", "Homepage: tekst", 1], ["heroKnop", "Homepage: knop"], ["collectieTitel", "Collectie: titel"], ["collectieTekst", "Collectie: tekst", 1], ["overTitel", "Over: titel"], ["overTekst", "Over: tekst", 1], ["koopTitel", "Kopen: titel"], ["koopTekst", "Kopen: tekst", 1], ["contactTitel", "Contact: titel"], ["contactTekst", "Contact: tekst", 1], ["email", "E-mailadres"], ["instagram", "Instagram-link"], ["etsy", "Etsy-winkel"], ["bedrijf", "Bedrijfsgegevens onderaan", 1], ["verkochtDagen", "Aantal dagen dat een via Etsy verkocht stuk nog zichtbaar blijft"]];
+let tTaal = "nl";
 function teksten() {
-  const t = D.teksten;
-  P().innerHTML = `<h2>Teksten</h2><form id="tf" class="vak">${VELDEN.map(([k, n, g]) => `<label>${n}${g ? `<textarea name="${k}">${h(t[k])}</textarea>` : `<input name="${k}" value="${h(t[k])}">`}</label>`).join("")}<label><input type="checkbox" name="toonPrijzen" ${t.toonPrijzen ? "checked" : ""}>Prijzen tonen op de site</label><p class="hulp">Staat dit uit, dan zien bezoekers de prijs pas op Etsy en hoef je niets dubbel bij te houden.</p><button class="k">Teksten opslaan</button></form>`;
-  $("#tf").onsubmit = (e) => { e.preventDefault(); bezig(e.submitter, async () => { const v = Object.fromEntries(new FormData(e.target)); v.toonPrijzen = e.target.toonPrijzen.checked; D.teksten = (await api("teksten-opslaan", { teksten: v })).teksten; toast("Teksten opgeslagen"); }); };
+  const nl = tTaal === "nl", t = nl ? D.teksten : D.teksten.i18n[tTaal], velden = nl ? VELDEN : VELDEN.slice(0, 11);
+  P().innerHTML = `<h2>Teksten</h2><div class="rij">${[["nl", "Nederlands"], ...TALEN].map(([c, n]) => `<button type="button" class="k ${c === tTaal ? "" : "l"}" data-taal="${c}">${n}</button>`).join("")}</div>
+  <form id="tf" class="vak">${nl ? "" : `<p class="hulp">Dit zijn de teksten voor bezoekers in deze taal. Heb je de Nederlandse tekst aangepast, laat Gemini hem dan opnieuw vertalen, lees hem na en sla op. Laat je een veld leeg, dan komt de standaardtekst terug.</p><button type="button" class="k l" id="tv">Vertalen vanuit het Nederlands</button>`}
+  ${velden.map(([k, n, g]) => `<label>${n}${g ? `<textarea name="${k}">${h(t[k])}</textarea>` : `<input name="${k}" value="${h(t[k])}">`}</label>`).join("")}
+  ${nl ? `<label><input type="checkbox" name="toonPrijzen" ${t.toonPrijzen ? "checked" : ""}>Prijzen tonen op de site</label><p class="hulp">Staat dit uit, dan zien bezoekers de prijs pas op Etsy en hoef je niets dubbel bij te houden.</p>` : ""}<button class="k">Teksten opslaan</button></form>`;
+  P().querySelectorAll("[data-taal]").forEach((b) => b.onclick = () => { tTaal = b.dataset.taal; teksten(); });
+  if (!nl) $("#tv").onclick = (e) => bezig(e.target, async () => { const r = await api("ai-vertaal-teksten", { taal: tTaal }); for (const [k, v] of Object.entries(r.teksten)) if ($("#tf").elements[k]) $("#tf").elements[k].value = v; toast("Vertaald. Lees na en sla op."); });
+  $("#tf").onsubmit = (e) => { e.preventDefault(); bezig(e.submitter, async () => { const v = Object.fromEntries(new FormData(e.target)); if (nl) v.toonPrijzen = e.target.toonPrijzen.checked; D.teksten = (await api("teksten-opslaan", { teksten: v, taal: tTaal })).teksten; toast("Teksten opgeslagen"); }); };
 }
 
 /* ---------- Sfeerfoto's ---------- */
@@ -194,12 +210,26 @@ function koppel() {
   const sy = D.sync;
   P().innerHTML = `<h2>Etsy en controle</h2>
   <div class="vak"><h3>Koppelingen controleren</h3><p class="hulp">Test in één keer de opslag, de Gemini-sleutel, de Etsy-foto's en de Etsy-koppeling. De test kost niets.</p><button class="k" id="ctl">Controle starten</button><ul id="ctlres" class="controle" role="status"></ul></div>
+  <div class="vak"><h3>Vertalingen</h3><p class="hulp">De site is er in zes talen en kiest zelf de taal van de bezoeker. Gemini vertaalt de titels en omschrijvingen van de stukken. Nieuwe en gewijzigde stukken wachten hier tot je ze laat vertalen; met de Etsy-koppeling gebeurt dat elke nacht vanzelf.</p><p id="vstat" role="status"></p><button class="k" id="vstart">Vertalingen bijwerken</button></div>
   <div class="vak"><h3>Automatisch bijwerken vanuit Etsy</h3>${D.etsy
     ? `<p class="hulp">De site haalt elke nacht de actuele artikelen uit Etsy: nieuwe stukken komen erbij, verkochte stukken krijgen het label Verkocht. Teksten die je hier zelf hebt aangepast, blijven staan.</p><p id="synctxt">${sy ? (sy.fout ? `<span class="fout">Laatste poging op ${datum(sy.wanneer)} mislukt: ${h(sy.fout)}</span>` : `Laatst bijgewerkt op ${datum(sy.wanneer)}: ${uitslag(sy)}`) : "Nog niet bijgewerkt."}</p><button class="k" id="sync">Nu bijwerken</button>`
     : `<p class="hulp">Nog niet ingesteld. Met een Etsy-sleutel (ETSY_API_KEY in Netlify) werkt de site zichzelf elke nacht bij. Hoe je die aanvraagt, staat in LEESMIJ.md. Zonder sleutel gebruik je de CSV-import hieronder.</p>`}</div>
   <div class="vak"><h3>Etsy-bestand inlezen</h3><p class="hulp">Ga op Etsy naar Shop Manager, Instellingen, Opties, Gegevens downloaden en download ‘Currently for sale listings’. Kies dat CSV-bestand hieronder. Bestaande stukken krijgen de beschrijving en alle foto's, ontbrekende stukken komen erbij.</p>
   <label><input type="checkbox" id="mv">Stukken die niet in het bestand staan op verkocht zetten</label><input type="file" id="cs" accept=".csv,text/csv"><p id="res" role="status"></p></div>
-  <div class="vak"><h3>Back-up</h3><p class="hulp">Bewaar af en toe een kopie van alle stukken en teksten. Geüploade foto's zitten er niet in; die blijven op de site staan.</p><div class="rij"><button class="k l" id="bu">Back-up downloaden</button><label class="k l" style="font-weight:600">Back-up terugzetten<input type="file" id="bt" accept=".json,application/json" hidden></label></div></div>`;
+  <div class="vak"><h3>Back-up</h3><p class="hulp">Bewaar af en toe een kopie van alle stukken, teksten en vertalingen. Geüploade foto's zitten er niet in; die blijven op de site staan.</p><div class="rij"><button class="k l" id="bu">Back-up downloaden</button><label class="k l" style="font-weight:600">Back-up terugzetten<input type="file" id="bt" accept=".json,application/json" hidden></label></div></div>`;
+  const vToon = () => { const r = D.vertaalRest || {}; $("#vstat").textContent = Object.values(r).some(Boolean) ? "Nog te vertalen: " + TALEN.map(([c, n]) => `${n} ${r[c] ?? 0}`).join(", ") + "." : "Alle stukken zijn vertaald."; };
+  vToon();
+  $("#vstart").onclick = (e) => bezig(e.target, async () => {
+    if (!D.ai) throw new Error("De Gemini-sleutel ontbreekt nog. Zet GEMINI_API_KEY in Netlify.");
+    toast("Gemini vertaalt. Laat deze pagina open tot het klaar is.");
+    const fouten = [];
+    await Promise.all(TALEN.map(async ([taal]) => {
+      try { for (let i = 0; i < 80 && D.vertaalRest[taal] > 0; i++) { const r = await api("vertaal-batch", { taal }); D.vertaalRest[taal] = r.rest; vToon(); if (!r.gedaan) break; } }
+      catch (err) { fouten.push(err.message); }
+    }));
+    D.vertaalRest = await api("vertaal-status"); vToon();
+    toast(fouten.length ? "Niet alles is vertaald: " + fouten[0] : "Vertalingen bijgewerkt");
+  });
   $("#ctl").onclick = (e) => bezig(e.target, async () => {
     $("#ctlres").innerHTML = "<li>Bezig met testen…</li>";
     try { const r = await api("controle"); $("#ctlres").innerHTML = r.controles.map((c) => `<li class="${c.ok === true ? "goed" : c.ok === false ? "mis" : "nvt"}"><strong>${h(c.naam)}</strong><br>${h(c.tekst)}</li>`).join(""); }
@@ -218,7 +248,7 @@ function koppel() {
     const u = await api("import", { regels, markeerVerkocht: mv }); D = await api("data");
     $("#res").textContent = uitslag(u);
   });
-  $("#bu").onclick = () => { const u = URL.createObjectURL(new Blob([JSON.stringify({ gemaakt: new Date().toISOString(), producten: D.producten, teksten: D.teksten, sfeer: D.sfeer }, null, 1)], { type: "application/json" })); const a = document.createElement("a"); a.href = u; a.download = "vanwijngaardenantiques-backup-" + new Date().toISOString().slice(0, 10) + ".json"; a.click(); setTimeout(() => URL.revokeObjectURL(u), 2000); };
+  $("#bu").onclick = (e) => bezig(e.target, async () => { const u = URL.createObjectURL(new Blob([JSON.stringify(await api("backup"), null, 1)], { type: "application/json" })); const a = document.createElement("a"); a.href = u; a.download = "vanwijngaardenantiques-backup-" + new Date().toISOString().slice(0, 10) + ".json"; a.click(); setTimeout(() => URL.revokeObjectURL(u), 2000); });
   $("#bt").onchange = (e) => e.target.files[0] && bezig(null, async () => {
     let b; try { b = JSON.parse(await e.target.files[0].text()); } catch { throw new Error("Dit bestand is geen back-up van deze site."); }
     if (!confirm(`De huidige collectie vervangen door de ${b.producten?.length ?? 0} stukken uit deze back-up?`)) return;

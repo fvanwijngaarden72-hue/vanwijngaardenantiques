@@ -1,5 +1,7 @@
 import { timingSafeEqual, createHash, randomUUID } from "node:crypto";
-import { CATEGORIEEN, CAT_IDS, data, fotos, json, laadProducten, laadSfeer, laadTeksten, slaProductenOp, STANDAARD_TEKSTEN } from "./lib/opslag.mjs";
+import { CATEGORIEEN, CAT_IDS, bronHash, data, fotos, json, laadProducten, laadSfeer, laadTeksten, laadVertaling, slaProductenOp, slaVertalingOp, STANDAARD_TEKSTEN } from "./lib/opslag.mjs";
+import { TAAL_VELDEN, VERTAAL_TALEN } from "./lib/talen.mjs";
+import { vertaalBatch, vertaalStatus, vertaalTeksten } from "./lib/vertaal.mjs";
 import { beeldModelKeuze, beschikbareModellen, bewerkFoto, gebruiktModel, tekstJson } from "./lib/gemini.mjs";
 import { etsyAan, etsyShop } from "./lib/etsy.mjs";
 import { etsySync, slugify, uniekeSlug, verwerk } from "./lib/sync.mjs";
@@ -43,7 +45,7 @@ const ACTIES = {
   login: async () => ({ ok: true }),
   data: async () => {
     const [producten, teksten, sfeer, sync] = await Promise.all([laadProducten(), laadTeksten(), laadSfeer(), data().get("etsy-sync", { type: "json" })]);
-    return { producten, teksten, sfeer, categorieen: CATEGORIEEN, ai: !!Netlify.env.get("GEMINI_API_KEY"), etsy: etsyAan(), sync };
+    return { producten, teksten, sfeer, categorieen: CATEGORIEEN, ai: !!Netlify.env.get("GEMINI_API_KEY"), etsy: etsyAan(), sync, vertaalRest: await vertaalStatus() };
   },
   "product-opslaan": async ({ product: p }) => {
     if (!p?.titel?.trim()) throw new Error("Vul een titel in.");
@@ -60,18 +62,47 @@ const ACTIES = {
     if (!oud) nieuw.toegevoegd = new Date().toISOString().slice(0, 10);
     delete nieuw.autoVerkocht; delete nieuw.verkochtOp; // een handmatige keuze gaat voor de automatische Etsy-controle
     await slaProductenOp(oud ? alle.map((x) => (String(x.id) === id ? nieuw : x)) : [nieuw, ...alle]);
+    // Vertalingen die in het formulier zijn nagekeken of verbeterd.
+    for (const taal of VERTAAL_TALEN) {
+      const v = p.i18n?.[taal];
+      if (!v || !String(v.titel || "").trim()) continue;
+      const V = await laadVertaling(taal);
+      V[id] = { titel: String(v.titel).trim().slice(0, 300), omschrijving: String(v.omschrijving || "").trim().slice(0, 9000), bron: bronHash(nieuw) };
+      await slaVertalingOp(taal, V);
+    }
     return { product: nieuw };
   },
   "product-verwijderen": async ({ id }) => {
     await slaProductenOp((await laadProducten()).filter((x) => String(x.id) !== String(id)));
     return { ok: true };
   },
-  "teksten-opslaan": async ({ teksten }) => {
+  "teksten-opslaan": async ({ teksten, taal }) => {
+    const oud = (await data().get("teksten", { type: "json" })) ?? {};
+    if (VERTAAL_TALEN.includes(taal)) {
+      const v = {};
+      for (const k of TAAL_VELDEN) if (String(teksten?.[k] || "").trim()) v[k] = String(teksten[k]).slice(0, 5000);
+      await data().setJSON("teksten", { ...oud, i18n: { ...oud.i18n, [taal]: v } });
+      return { teksten: await laadTeksten() };
+    }
     const schoon = {};
     for (const k of Object.keys(STANDAARD_TEKSTEN)) if (k in (teksten || {})) schoon[k] = k === "toonPrijzen" ? !!teksten[k] : String(teksten[k]).slice(0, 5000);
     for (const k of ["instagram", "etsy"]) if (schoon[k] && !/^https:\/\//.test(schoon[k])) throw new Error("De link bij ‘" + k + "’ moet met https:// beginnen.");
-    await data().setJSON("teksten", schoon);
+    await data().setJSON("teksten", { ...schoon, i18n: oud.i18n });
     return { teksten: await laadTeksten() };
+  },
+  "vertaal-batch": async ({ taal }) => vertaalBatch(taal),
+  "vertaal-status": async () => vertaalStatus(),
+  "vertaling-lezen": async ({ id }) => {
+    const uit = {};
+    for (const taal of VERTAAL_TALEN) { const v = (await laadVertaling(taal))[String(id)]; uit[taal] = { titel: v?.titel || "", omschrijving: v?.omschrijving || "" }; }
+    return uit;
+  },
+  "ai-vertaal-teksten": async ({ taal }) => ({ teksten: await vertaalTeksten(taal) }),
+  backup: async () => {
+    const [producten, teksten, sfeer] = await Promise.all([laadProducten(), laadTeksten(), laadSfeer()]);
+    const vertalingen = {};
+    for (const taal of VERTAAL_TALEN) vertalingen[taal] = await laadVertaling(taal);
+    return { gemaakt: new Date().toISOString(), producten, teksten, sfeer, vertalingen };
   },
   "sfeer-opslaan": async ({ sfeer }) => {
     await data().setJSON("sfeer", (Array.isArray(sfeer) ? sfeer : []).filter((s) => /^\/foto\//.test(s?.foto)).map((s) => ({ foto: s.foto, alt: String(s.alt || "").slice(0, 200) })));
@@ -95,7 +126,11 @@ const ACTIES = {
   "backup-terugzetten": async ({ backup: b }) => {
     if (!Array.isArray(b?.producten) || !b.producten.every((p) => p && p.id && p.titel && p.slug && p.foto)) throw new Error("Dit is geen geldige back-up van deze site.");
     await slaProductenOp(b.producten);
-    if (b.teksten && typeof b.teksten === "object") await ACTIES["teksten-opslaan"]({ teksten: b.teksten });
+    if (b.teksten && typeof b.teksten === "object") {
+      await ACTIES["teksten-opslaan"]({ teksten: b.teksten });
+      for (const taal of VERTAAL_TALEN) if (b.teksten.i18n?.[taal]) await ACTIES["teksten-opslaan"]({ teksten: b.teksten.i18n[taal], taal });
+    }
+    for (const taal of VERTAAL_TALEN) { const v = b.vertalingen?.[taal]; if (v && typeof v === "object" && !Array.isArray(v)) await slaVertalingOp(taal, v); }
     if (Array.isArray(b.sfeer)) await ACTIES["sfeer-opslaan"]({ sfeer: b.sfeer });
     return { ok: true };
   },
@@ -117,6 +152,10 @@ const ACTIES = {
       await stap("Gemini-tekst (omschrijvingen en bijschriften)", async () => { const r = await tekstJson('Antwoord met precies deze JSON: {"ok": true}'); if (r?.ok !== true) throw new Error("Onverwacht antwoord."); return "Werkt met model " + gebruiktModel("tekst") + "."; });
       await stap("Gemini-beeld (Foto Studio)", async () => { const m = beeldModelKeuze(lijst); if (!m) throw new Error("Bij deze sleutel is geen beeldmodel beschikbaar. Zet facturering aan in Google AI Studio of stel GEMINI_BEELD_MODEL in."); return "Model " + m + " is beschikbaar. Een echte proef doe je in Foto Studio (kost een paar cent)."; });
     }
+    await stap("Vertalingen", async () => {
+      const r = await vertaalStatus(), n = Math.max(...Object.values(r));
+      return n ? { ok: null, tekst: `Nog ${n} stukken te vertalen. Klik hieronder op ‘Vertalingen bijwerken’.` } : "Alle stukken zijn vertaald in vijf talen.";
+    });
     await stap("Foto's van Etsy", async () => {
       const p = producten.find((x) => (x.foto || "").includes("i.etsystatic.com"));
       if (!p) return { ok: null, tekst: "Er zijn geen stukken met een Etsy-foto." };

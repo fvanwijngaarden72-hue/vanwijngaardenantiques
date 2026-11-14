@@ -1,5 +1,7 @@
 import { getStore } from "@netlify/blobs";
+import { createHash } from "node:crypto";
 import { SEED_PRODUCTEN } from "./seed-producten.mjs";
+import { STANDAARD_VERTALING, TAAL_VELDEN, VERTAAL_TALEN } from "./talen.mjs";
 
 export const data = () => getStore({ name: "vwa-data", consistency: "strong" });
 export const fotos = () => getStore({ name: "vwa-fotos", consistency: "strong" });
@@ -37,12 +39,29 @@ export const STANDAARD_TEKSTEN = {
 };
 
 export async function laadProducten() {
+  const p = await data().get("producten", { type: "json" });
+  if (p) return p;
   // Een kopie, zodat bewerkingen de startlijst in het geheugen nooit veranderen.
-  return (await data().get("producten", { type: "json" })) ?? structuredClone(SEED_PRODUCTEN);
+  return structuredClone(SEED_PRODUCTEN).map(({ i18n, ...rest }) => rest);
 }
 export async function laadTeksten() {
-  return { ...STANDAARD_TEKSTEN, ...((await data().get("teksten", { type: "json" })) ?? {}) };
+  const t = { ...STANDAARD_TEKSTEN, ...((await data().get("teksten", { type: "json" })) ?? {}) };
+  const i18n = {};
+  for (const taal of VERTAAL_TALEN) { i18n[taal] = {}; for (const k of TAAL_VELDEN) i18n[taal][k] = t.i18n?.[taal]?.[k] || STANDAARD_VERTALING[taal][k]; }
+  return { ...t, i18n };
 }
+// Vingerafdruk van de Nederlandse tekst: verandert die, dan is de vertaling verouderd.
+export const bronHash = (p) => createHash("sha1").update(p.titel + "\n" + (p.omschrijving || "")).digest("hex").slice(0, 10);
+/** Vertalingen van één taal: { [stuk-id]: { titel, omschrijving, bron } }. */
+export async function laadVertaling(taal) {
+  const v = await data().get("vertaling-" + taal, { type: "json" });
+  if (v) return v;
+  const uit = {};
+  for (const p of SEED_PRODUCTEN) if (p.i18n?.[taal]?.titel) uit[p.id] = { ...p.i18n[taal], bron: bronHash(p) };
+  return uit;
+}
+export const slaVertalingOp = (taal, v) => data().setJSON("vertaling-" + taal, v);
+export const mistVertaling = (p, V) => !V[p.id]?.titel || V[p.id].bron !== bronHash(p);
 export async function laadSfeer() {
   return (await data().get("sfeer", { type: "json" })) ?? [];
 }
