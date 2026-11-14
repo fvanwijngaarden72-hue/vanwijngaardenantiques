@@ -45,4 +45,5 @@ export default async (req) => {
   const html = (sjabloon || NOOD).replace(/<html lang="[^"]*">/, `<html lang="${taal}">`).replace(/<title>[^<]*<\/title>/, "").replace(/<meta name="description"[^>]*>/, "").replace(/<meta property="og:[^>]*>/g, "").replace("</head>", () => kop + "</head>");
   return new Response(html, { status, headers: { "content-type": "text/html; charset=utf-8", "cache-control": "public, max-age=0, must-revalidate" } });
 };
-export const config = { path: ["/stuk/:slug", "/collectie/:cat", ...["en", "de", "fr", "it", "es"].flatMap((t) => ["/" + t, "/" + t + "/*"])], method: "GET" };
+// Netlify leest deze instelling zonder de code uit te voeren: de paden moeten dus letterlijk uitgeschreven zijn.
+export const config = { path: ["/stuk/:slug", "/collectie/:cat", "/en", "/en/*", "/de", "/de/*", "/fr", "/fr/*", "/it", "/it/*", "/es", "/es/*"], method: "GET" };
