@@ -27,6 +27,15 @@ async function naarJpeg(dataUrl, max = 2000) {
   const x = c.getContext("2d"); x.fillStyle = "#fff"; x.fillRect(0, 0, c.width, c.height); x.drawImage(i, 0, 0, c.width, c.height);
   return c.toDataURL("image/jpeg", .9);
 }
+const slugNaam = (t) => String(t || "foto").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60) || "foto";
+// Downloadt een foto naar de computer of telefoon. Etsy-foto's komen in de grootste maat.
+async function downloadFoto(u, naam) {
+  const bron = u.startsWith("data:") ? u : beeldBron(u.replace(/il_(?:\d+x\w+)\./, "il_fullxfull."));
+  const r = await fetch(bron); if (!r.ok) throw new Error("Deze foto kon niet worden gedownload.");
+  const b = await r.blob(), url = URL.createObjectURL(b), a = document.createElement("a");
+  a.href = url; a.download = naam + ({ "image/png": ".png", "image/webp": ".webp" }[b.type] || ".jpg"); document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 3000);
+}
+async function kopieer(tekst, wat) { try { await navigator.clipboard.writeText(tekst); toast(wat + " gekopieerd"); } catch { toast("Kopiëren lukt niet in deze browser. Selecteer de tekst en kopieer hem zelf."); } }
 const catOpties = (w) => D.categorieen.map((c) => `<option value="${c.id}" ${c.id === w ? "selected" : ""}>${h(c.naam)}</option>`).join("");
 const TABS = [["stukken", "Stukken"], ["studio", "Foto Studio"], ["insta", "Instagram-maker"], ["teksten", "Teksten"], ["sfeer", "Sfeerfoto's"], ["koppel", "Etsy en controle"]];
 function kies(t) { tab = t; $("#tabs").innerHTML = TABS.map(([i, n]) => `<button data-t="${i}" ${i === t ? 'aria-current="page"' : ""}>${n}</button>`).join(""); ({ stukken, studio: toonStudio, insta: toonInsta, teksten, sfeer, koppel })[t](); scrollTo(0, 0); }
@@ -58,6 +67,10 @@ function formulier(p) {
   <label>Merk<input name="merk" value="${h(p.merk)}"></label><label>Titel<input name="titel" value="${h(p.titel)}" required></label>
   <label>Omschrijving<textarea name="omschrijving">${h(p.omschrijving)}</textarea></label>
   ${p.id ? `<details id="vd"><summary>Vertalingen nalezen of verbeteren</summary><p class="hulp">Gemini maakt de vertalingen bij ‘Etsy en controle’. Pas je hierboven de Nederlandse tekst aan, dan wordt het stuk daar opnieuw vertaald.</p><label>Taal<select id="vtaal">${TALEN.map(([c, n]) => `<option value="${c}">${n}</option>`).join("")}</select></label><label>Titel in deze taal<input id="vtitel"></label><label>Omschrijving in deze taal<textarea id="vomschr"></textarea></label></details>` : ""}
+  ${p.id ? `<details id="ed"><summary>Overzetten naar Etsy</summary><p class="hulp">Kopieer de velden een voor een naar een nieuw artikel in Etsy en download de foto's. Plak daarna de link van het Etsy-artikel hieronder bij ‘Link naar Etsy’.</p>
+  <div class="rij"><button type="button" class="k l" id="eai">Etsy-tekst voorstellen met Gemini</button><select id="etaal" aria-label="Taal van de Etsy-tekst" style="flex:0 1 150px"><option value="nl">Nederlands</option><option value="en">Engels</option></select><a class="k l" href="https://www.etsy.com/your/shops/me/tools/listings" target="_blank" rel="noopener">Etsy openen</a></div>
+  ${[["etitel", "Titel (max. 140 tekens)", 0], ["eomschr", "Beschrijving", 1], ["etags", "Tags (max. 13)", 0], ["eprijs", "Prijs", 0]].map(([id, n, g]) => `<label>${n}<span class="kopie">${g ? `<textarea id="${id}"></textarea>` : `<input id="${id}">`}<button type="button" class="k l" data-kopie="${id}">Kopieer</button></span></label>`).join("")}
+  <div class="rij"><button type="button" class="k l" id="efoto">Foto's downloaden</button></div></details>` : ""}
   <label>Link naar Etsy<input name="etsyUrl" type="url" placeholder="https://www.etsy.com/listing/..." value="${h(p.etsyUrl)}"></label>
   <div class="rij"><label style="flex:1">Categorie<select name="categorie">${catOpties(p.categorie)}</select></label><label style="flex:1">Status<select name="status">${["beschikbaar", "verkocht", "verborgen"].map((s) => `<option ${s === p.status ? "selected" : ""}>${s}</option>`).join("")}</select></label><label style="flex:1">Prijs (euro)<input name="prijs" type="number" step="0.01" min="0" value="${p.prijs ?? ""}"></label></div>
   <label><input type="checkbox" name="uitgelicht" ${p.uitgelicht ? "checked" : ""}>Tonen op de homepage</label>
@@ -70,6 +83,19 @@ function formulier(p) {
     $("#vd", d).ontoggle = async () => { if (!$("#vd", d).open || vert) return; try { vert = await api("vertaling-lezen", { id: p.id }); toon(); } catch (e) { toast(e.message); } };
     $("#vtaal", d).onchange = () => vert && toon();
     for (const [id, veld] of [["#vtitel", "titel"], ["#vomschr", "omschrijving"]]) $(id, d).oninput = (e) => { if (!vert) return; const t = $("#vtaal", d).value; vert[t][veld] = e.target.value; vGewijzigd.add(t); };
+  }
+  if (p.id) {
+    $("#etitel", d).value = [p.merk, p.titel].filter(Boolean).join(" ").slice(0, 140); $("#eomschr", d).value = p.omschrijving || ""; $("#eprijs", d).value = p.prijs != null ? p.prijs.toFixed(2).replace(".", ",") : "";
+    d.querySelectorAll("[data-kopie]").forEach((b) => b.onclick = () => kopieer($("#" + b.dataset.kopie, d).value, b.parentElement.parentElement.firstChild.textContent.split(" (")[0]));
+    $("#eai", d).onclick = (e) => bezig(e.target, async () => {
+      const r = await api("ai-etsy", { fotoUrl: p.foto, merk: f.merk.value, titel: f.titel.value, omschrijving: f.omschrijving.value, taal: $("#etaal", d).value });
+      $("#etitel", d).value = r.titel; $("#eomschr", d).value = r.omschrijving; $("#etags", d).value = r.tags.join(", "); toast("Voorstel klaar. Lees na en kopieer.");
+    });
+    $("#efoto", d).onclick = (e) => bezig(e.target, async () => {
+      const lijst = [p.foto, ...(p.fotos || []).filter((u) => u !== p.foto)].slice(0, 10), naam = slugNaam([p.merk, p.titel].join(" "));
+      for (let i = 0; i < lijst.length; i++) { await downloadFoto(lijst[i], naam + (lijst.length > 1 ? "-" + (i + 1) : "")); await new Promise((r) => setTimeout(r, 400)); }
+      toast(lijst.length === 1 ? "Foto gedownload" : lijst.length + " foto's gedownload");
+    });
   }
   f.onsubmit = (e) => {
     if (e.submitter?.value !== "ok") return; e.preventDefault();
@@ -101,7 +127,7 @@ function toonStudio() {
   P().innerHTML = `<h2>Foto Studio</h2>${geenAi()}<div class="twee"><div class="vak">
   <label>Nieuwe foto<input type="file" id="f" accept="image/*"></label><label>Of een bestaand stuk${stukKiezer("sk")}</label>
   <div class="voorbeeld">${huidig ? `<img id="vb" src="${h(bronSrc)}" alt="Voorbeeld">` : "Kies een foto om te beginnen"}</div>
-  ${s.resultaat ? `<div class="rij"><button class="k l" id="terug">Terug naar origineel</button></div>` : ""}</div>
+  ${huidig ? `<div class="rij">${s.resultaat ? `<button class="k l" id="terug">Terug naar origineel</button>` : ""}<button class="k l" id="sdl">Foto downloaden</button></div>` : ""}</div>
   <div class="vak"><p class="hulp">Gemini bewerkt alleen de omgeving. Controleer altijd of het porselein nog precies klopt met het echte stuk.</p>
   <div class="rij">${[["wit", "Witte achtergrond"], ["linnen", "Op linnen"], ["tafel", "Gedekte tafel"], ["hout", "Eikenhouten tafel"], ["kobalt", "Kobaltblauw"]].map(([m, n]) => `<button class="k l sc" data-m="${m}">${n}</button>`).join("")}</div>
   <label>Eigen opdracht<textarea id="opdr" placeholder="Bijvoorbeeld: zet het op een vensterbank met zacht ochtendlicht" style="min-height:64px"></textarea></label><button class="k l sc" data-m="eigen">Voer opdracht uit</button>
@@ -114,6 +140,7 @@ function toonStudio() {
   $("#f").onchange = async (e) => { if (e.target.files[0]) nieuweBron(await verklein(e.target.files[0]), null); };
   $("#sk").onchange = (e) => { const p = D.producten.find((x) => x.id === e.target.value); if (p) nieuweBron(p.foto, p); };
   if ($("#terug")) $("#terug").onclick = () => { onthoud(); s.resultaat = null; toonStudio(); };
+  if ($("#sdl")) $("#sdl").onclick = (e) => bezig(e.target, async () => { const b = s.resultaat || s.bron; await downloadFoto(b.startsWith("data:") ? await naarJpeg(b, 3000) : b, slugNaam([$("#m").value, $("#t").value].join(" "))); });
   const aiBron = () => { const b = s.resultaat || s.bron; return b?.startsWith("data:") ? { foto: b } : { fotoUrl: b }; };
   P().querySelectorAll(".sc").forEach((b) => b.onclick = () => { if (!s.bron) return toast("Kies eerst een foto."); onthoud(); toast("Gemini is bezig, dit duurt zo'n 20 seconden"); bezig(b, async () => { const opdracht = $("#opdr").value; const r = await api("ai-foto", { ...(s.bron.startsWith("data:") ? { foto: s.bron } : { fotoUrl: s.bron }), modus: b.dataset.m, opdracht }); s.resultaat = r.foto; toonStudio(); toast("Foto bewerkt"); }); });
   $("#ai").onclick = (e) => { if (!s.bron) return toast("Kies eerst een foto."); bezig(e.target, async () => { const r = await api("ai-tekst", { ...aiBron(), hint: $("#hint").value }); onthoud(); Object.assign(s, { merk: r.merk || s.merk, titel: r.titel, omschrijving: r.omschrijving, categorie: r.categorie, prijsindicatie: r.prijsindicatie }); toonStudio(); }); };
@@ -161,7 +188,10 @@ function toonInsta() {
   <div class="rij"><label style="flex:1">Toon<select id="tn"><option>warm en persoonlijk</option><option>verfijnd en rustig</option><option>speels</option></select></label><label style="flex:1">Taal<select id="tl"><option value="nl">Nederlands</option><option value="en">Engels</option><option value="beide">Nederlands en Engels</option></select></label></div>
   <label>Extra wens voor de tekst<input id="ws" placeholder="Bijvoorbeeld: past mooi bij de feestdagen"></label><button class="k l" id="bs">Bijschrift maken met Gemini</button>
   <label>Bijschrift<textarea id="tx" style="min-height:170px">${h(i.bijschrift)}</textarea></label>
-  <div class="rij"><button class="k" id="dl">Afbeelding downloaden</button><button class="k l" id="kp">Bijschrift kopiëren</button><button class="k l" id="dl2">Delen vanaf telefoon</button></div></div></div>`;
+  <div class="rij"><button class="k" id="dl">Afbeelding downloaden</button><button class="k l" id="kp">Bijschrift kopiëren</button><button class="k l" id="dl2">Delen vanaf telefoon</button></div>
+  ${D.insta ? `<div class="rij"><button class="k" id="igp">Nu op Instagram plaatsen</button>${i.product?.instagram ? `<a href="${h(i.product.instagram.link)}" target="_blank" rel="noopener">Al geplaatst op ${new Date(i.product.instagram.wanneer).toLocaleDateString("nl-NL")}</a>` : ""}</div>
+  <label><input type="checkbox" id="iga" ${D.instellingen.instaAuto ? "checked" : ""}>Elke nacht één nieuw stuk automatisch plaatsen</label><p class="hulp">De site plaatst dan de productfoto van het oudste stuk dat in de afgelopen twee weken is toegevoegd en nog niet op Instagram staat, met een bijschrift van Gemini in het Nederlands en Engels. Je leest dat bijschrift dus niet vooraf na.</p>${D.instaFout ? `<p class="fout">Automatisch plaatsen mislukte op ${new Date(D.instaFout.wanneer).toLocaleDateString("nl-NL")}: ${h(D.instaFout.fout)}</p>` : ""}`
+  : `<p class="hulp">Instagram is nog niet gekoppeld, dus plaatsen gaat via downloaden of delen. Met een koppeling (INSTAGRAM_TOKEN in Netlify, zie LEESMIJ.md) plaats je hier met één klik.</p>`}</div></div>`;
   $("#sj").value = i.sjabloon; $("#fm").value = i.formaat; if (i.product?.id) $("#ik").value = i.product.id;
   $("#ik").onchange = (e) => { const p = D.producten.find((x) => x.id === e.target.value); if (p) { i.product = p; i.foto = p.foto; tekenInsta(); } };
   $("#iv").onchange = async (e) => { if (e.target.files[0]) { i.foto = await verklein(e.target.files[0]); tekenInsta(); } };
@@ -177,6 +207,17 @@ function toonInsta() {
   $("#dl").onclick = async () => { const u = URL.createObjectURL(await blob()); const a = document.createElement("a"); a.href = u; a.download = "vanwijngaarden-instagram.jpg"; a.click(); setTimeout(() => URL.revokeObjectURL(u), 2000); };
   $("#kp").onclick = async () => { await navigator.clipboard.writeText($("#tx").value); toast("Bijschrift gekopieerd"); };
   $("#dl2").onclick = async () => { const file = new File([await blob()], "vanwijngaarden-instagram.jpg", { type: "image/jpeg" }); try { await navigator.clipboard.writeText($("#tx").value); } catch {} if (navigator.canShare?.({ files: [file] })) { await navigator.share({ files: [file] }).catch(() => {}); } else toast("Delen werkt alleen op een telefoon. Download de afbeelding."); };
+  if ($("#igp")) {
+    $("#igp").onclick = (e) => bezig(e.target, async () => {
+      if (!i.foto) throw new Error("Kies eerst een stuk of foto.");
+      if (!confirm("Deze afbeelding met dit bijschrift nu op Instagram plaatsen?")) return;
+      toast("Bezig met plaatsen, dit duurt even");
+      const r = await api("insta-plaatsen", { foto: $("#doek").toDataURL("image/jpeg", .93), bijschrift: $("#tx").value, id: i.product?.id });
+      if (i.product?.id) { const p = D.producten.find((x) => x.id === i.product.id); if (p) p.instagram = { wanneer: new Date().toISOString(), link: r.link }; i.product = p || i.product; }
+      toonInsta(); toast("Geplaatst op Instagram");
+    });
+    $("#iga").onchange = (e) => bezig(null, async () => { D.instellingen = (await api("instellingen-opslaan", { instellingen: { ...D.instellingen, instaAuto: e.target.checked } })).instellingen; toast(e.target.checked ? "Automatisch plaatsen staat aan" : "Automatisch plaatsen staat uit"); });
+  }
   tekenInsta();
 }
 

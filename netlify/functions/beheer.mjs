@@ -2,6 +2,8 @@ import { timingSafeEqual, createHash, randomUUID } from "node:crypto";
 import { CATEGORIEEN, CAT_IDS, bronHash, data, fotos, json, laadProducten, laadSfeer, laadTeksten, laadVertaling, slaProductenOp, slaVertalingOp, STANDAARD_TEKSTEN } from "./lib/opslag.mjs";
 import { TAAL_VELDEN, VERTAAL_TALEN } from "./lib/talen.mjs";
 import { vertaalBatch, vertaalStatus, vertaalTeksten } from "./lib/vertaal.mjs";
+import { instaAan, instaAccount, plaats } from "./lib/instagram.mjs";
+import { maakBijschrift } from "./lib/bijschrift.mjs";
 import { beeldModelKeuze, beschikbareModellen, bewerkFoto, gebruiktModel, tekstJson } from "./lib/gemini.mjs";
 import { etsyAan, etsyShop } from "./lib/etsy.mjs";
 import { etsySync, slugify, uniekeSlug, verwerk } from "./lib/sync.mjs";
@@ -44,8 +46,8 @@ const getal = (v) => (v === "" || v == null || isNaN(+v) ? null : +v);
 const ACTIES = {
   login: async () => ({ ok: true }),
   data: async () => {
-    const [producten, teksten, sfeer, sync] = await Promise.all([laadProducten(), laadTeksten(), laadSfeer(), data().get("etsy-sync", { type: "json" })]);
-    return { producten, teksten, sfeer, categorieen: CATEGORIEEN, ai: !!Netlify.env.get("GEMINI_API_KEY"), etsy: etsyAan(), sync, vertaalRest: await vertaalStatus() };
+    const [producten, teksten, sfeer, sync, instellingen, instaFout] = await Promise.all([laadProducten(), laadTeksten(), laadSfeer(), data().get("etsy-sync", { type: "json" }), data().get("instellingen", { type: "json" }), data().get("instagram-fout", { type: "json" })]);
+    return { producten, teksten, sfeer, categorieen: CATEGORIEEN, ai: !!Netlify.env.get("GEMINI_API_KEY"), etsy: etsyAan(), sync, vertaalRest: await vertaalStatus(), insta: instaAan(), instellingen: instellingen ?? {}, instaFout };
   },
   "product-opslaan": async ({ product: p }) => {
     if (!p?.titel?.trim()) throw new Error("Vul een titel in.");
@@ -163,6 +165,11 @@ const ACTIES = {
       if (!r.ok || !(r.headers.get("content-type") || "").startsWith("image/")) throw new Error("Etsy gaf de foto niet (status " + r.status + ").");
       return "Bereikbaar.";
     });
+    await stap("Instagram-koppeling", async () => {
+      if (!instaAan()) return { ok: null, tekst: "Niet ingesteld. Dit is optioneel: zonder koppeling download je de afbeelding en plaats je hem zelf." };
+      const a = await instaAccount();
+      return `Verbonden met @${a.naam}.` + (a.verloopt ? ` Het token is geldig tot ${new Date(a.verloopt).toLocaleDateString("nl-NL")} en wordt elke nacht verlengd.` : " Het token wordt vannacht voor het eerst verlengd.");
+    });
     await stap("Etsy-koppeling (automatisch bijwerken)", async () => {
       if (!etsyAan()) return { ok: null, tekst: "Niet ingesteld. Dit is optioneel: zonder sleutel gebruik je de CSV-import." };
       const s = await etsyShop();
@@ -183,15 +190,33 @@ Geef JSON met: "merk" (alleen als het zichtbaar is of door de verkoper is genoem
     if (!scene) throw new Error("Beschrijf wat er moet veranderen.");
     return { foto: await bewerkFoto(scene + BEHOUD, foto) };
   },
-  "ai-bijschrift": async (b) => {
+  "ai-bijschrift": async (b) => maakBijschrift(b, await fotoVoorAi(b).catch(() => null)),
+  "ai-etsy": async (b) => {
     const foto = await fotoVoorAi(b).catch(() => null);
-    const taal = { nl: "Nederlands", en: "Engels", beide: "eerst Nederlands, dan een witregel en dezelfde tekst in het Engels" }[b.taal] || "Nederlands";
-    const kort = (s, n) => String(s || "").slice(0, n);
-    const r = await tekstJson(`Schrijf een Instagram-bijschrift voor een verkoper van vintage porselein (Van Wijngaarden Antiques).
-Stuk: ${kort(b.merk, 80)} ${kort(b.titel, 200)}. Omschrijving: ${kort(b.omschrijving, 1500) || "geen"}. Etsy-titel: ${kort(b.etsyTitel, 300) || "geen"}. Extra wens: ${kort(b.wens, 300) || "geen"}.
-Toon: ${kort(b.toon, 60) || "warm en persoonlijk"}. Taal: ${taal}. Noem aan het eind dat het stuk te koop is via de link in de bio. Verzin geen leeftijd, staat of prijs. Gebruik hoogstens één emoji.
-Geef JSON met "bijschrift" (string zonder hashtags) en "hashtags" (array van 8 tot 12 relevante hashtags met #).`, foto);
-    return { bijschrift: String(r.bijschrift || ""), hashtags: Array.isArray(r.hashtags) ? r.hashtags.map(String) : [] };
+    const taal = b.taal === "en" ? "Engels" : "Nederlands";
+    const r = await tekstJson(`Je helpt een verkoper van vintage porselein een artikel op Etsy te zetten. Schrijf in het ${taal}.
+Stuk: ${String(b.merk || "").slice(0, 80)} ${String(b.titel || "").slice(0, 200)}. Omschrijving van de verkoper: ${String(b.omschrijving || "geen").slice(0, 3000)}.
+Geef JSON met: "titel" (Etsy-titel van hoogstens 140 tekens: merk en serie vooraan, daarna wat het is en bruikbare zoekwoorden, gescheiden door komma's), "omschrijving" (nette Etsy-beschrijving in korte alinea's op basis van de omschrijving van de verkoper en de foto; verzin geen leeftijd, staat, maten of aantallen; eindig met een regel dat vintage stukken gebruikssporen kunnen hebben), "tags" (array van precies 13 zoektermen van elk hoogstens 20 tekens, zonder #).`, foto);
+    return { titel: String(r.titel || "").slice(0, 140), omschrijving: String(r.omschrijving || ""), tags: (Array.isArray(r.tags) ? r.tags : []).map((t) => String(t).replace(/^#/, "").slice(0, 20)).filter(Boolean).slice(0, 13) };
+  },
+  "insta-plaatsen": async ({ foto, bijschrift, id }, req) => {
+    const d = dataUrlNaarDeel(foto);
+    if (d.mimeType !== "image/jpeg") throw new Error("Instagram accepteert alleen JPG-foto's.");
+    if (!String(bijschrift || "").trim()) throw new Error("Schrijf eerst een bijschrift.");
+    const key = "insta-" + randomUUID() + ".jpg";
+    await fotos().set(key, Buffer.from(d.data, "base64"), { metadata: { type: "image/jpeg" } });
+    const site = Netlify.env.get("URL") || new URL(req.url).origin;
+    const post = await plaats(site + "/foto/" + key, bijschrift);
+    if (id) {
+      const alle = await laadProducten(), p = alle.find((x) => String(x.id) === String(id));
+      if (p) { p.instagram = { wanneer: new Date().toISOString(), link: post.link }; await slaProductenOp(alle); }
+    }
+    return post;
+  },
+  "instellingen-opslaan": async ({ instellingen: i }) => {
+    const uit = { instaAuto: !!i?.instaAuto, instaTaal: ["nl", "en", "beide"].includes(i?.instaTaal) ? i.instaTaal : "beide" };
+    await data().setJSON("instellingen", uit);
+    return { instellingen: uit };
   },
 };
 
@@ -203,7 +228,7 @@ export default async (req, context) => {
   }
   const actie = ACTIES[context.params.actie];
   if (!actie) return json({ fout: "Onbekende actie." }, 404);
-  try { return json(await actie(await req.json().catch(() => ({}))), 200, { "cache-control": "no-store" }); }
+  try { return json(await actie(await req.json().catch(() => ({})), req), 200, { "cache-control": "no-store" }); }
   catch (e) { console.error(e); return json({ fout: e.message || "Er ging iets mis." }, 400); }
 };
 export const config = { path: "/api/beheer/:actie", method: "POST",

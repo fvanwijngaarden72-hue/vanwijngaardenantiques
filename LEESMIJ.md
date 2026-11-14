@@ -24,6 +24,7 @@ Netlify > **Add new project > Import an existing project > GitHub** > kies de re
 | `BEHEER_WACHTWOORD` | ja | Een wachtwoord van minstens 12 tekens voor het beheer |
 | `GEMINI_API_KEY` | ja | Sleutel van aistudio.google.com (Get API key). Voor Foto Studio moet facturering aanstaan: fotobewerking zit niet in het gratis deel |
 | `ETSY_API_KEY` | optioneel | `keystring:shared_secret` van etsy.com/developers/your-apps. Hiermee werkt de site zichzelf elke nacht bij |
+| `INSTAGRAM_TOKEN` | optioneel | Toegangstoken van het Instagram-account, zie ‘Instagram koppelen’. Hiermee plaats je vanuit het beheer |
 | `ETSY_SHOP_ID` | optioneel | Alleen als de controle zegt dat de winkel niet wordt gevonden |
 | `GEMINI_BEELD_MODEL`, `GEMINI_TEKST_MODEL` | optioneel | Alleen om zelf een model te kiezen. Standaard zoekt de site zelf een werkend model |
 
@@ -46,7 +47,7 @@ Teksten die je in het beheer zelf hebt aangepast, worden door geen van beide ove
 ## Beheer
 - **Stukken**: toevoegen, wijzigen, op verkocht zetten, kiezen wat op de homepage staat
 - **Foto Studio**: achtergrond vervangen en tekst laten voorstellen
-- **Instagram-maker**: afbeelding en bijschrift maken
+- **Instagram-maker**: afbeelding en bijschrift maken, en met koppeling direct plaatsen
 - **Teksten**: alle vaste teksten, en prijzen aan of uit
 - **Sfeerfoto's**: brede foto's tussen de collectie
 - **Etsy en controle**: koppelingen testen, Etsy bijwerken, CSV inlezen, back-up maken en terugzetten
@@ -60,6 +61,20 @@ De site is er in het Nederlands, Engels, Duits, Frans, Italiaans en Spaans. Een 
 - **Stukken**: Gemini vertaalt titels en omschrijvingen via **Etsy en controle > Vertalingen bijwerken**. Verandert de Nederlandse tekst van een stuk, dan staat het daar opnieuw in de wachtrij. Met de Etsy-sleutel gebeurt het vertalen elke nacht vanzelf.
 - **Verbeteren**: open een stuk en klap **Vertalingen nalezen of verbeteren** uit.
 - Zolang een stuk nog niet vertaald is, zien bezoekers de Engelse of anders de Nederlandse titel.
+
+## Een stuk overzetten naar Etsy
+Open een stuk in het beheer en klap **Overzetten naar Etsy** uit. Je kunt titel, beschrijving, tags en prijs elk met één klik kopiëren en alle foto's downloaden. Gemini kan een Etsy-titel, beschrijving en 13 tags voorstellen. Plak na het aanmaken de link van het Etsy-artikel bij het stuk.
+
+## Instagram koppelen
+Zonder koppeling maak je de afbeelding in de Instagram-maker en plaats je hem zelf (downloaden of delen). Met koppeling plaats je met één klik, en kan de site elke nacht één nieuw stuk plaatsen.
+
+1. Maak een Instagram-account aan en zet het om naar een **professioneel account** (Instellingen > Accounttype en tools > Overstappen naar professioneel account > Bedrijf).
+2. Ga naar developers.facebook.com, log in en maak een app aan (**My Apps > Create App**). Voeg het product **Instagram** toe en kies **API setup with Instagram login**.
+3. Voeg daar het Instagram-account toe en klik **Generate token**. Log in met het Instagram-account en geef toestemming, ook voor het plaatsen van berichten.
+4. Zet het token in Netlify als `INSTAGRAM_TOKEN` en deploy opnieuw.
+5. Controleer in het beheer bij **Etsy en controle > Controle starten** of er ‘Verbonden met @…’ staat.
+
+Het token is 60 dagen geldig. De site verlengt het elke nacht zelf. Staat de site langer dan 60 dagen stil, maak dan een nieuw token aan.
 
 ## Etsy Share & Save
 Alle knoppen naar Etsy gebruiken de vorm `rientsporselein.etsy.com/...`. Alleen links in die vorm tellen mee voor de teruggave van Etsy. Meld de winkel eenmalig aan: Etsy > Shop Manager > Marketing > Share & Save.

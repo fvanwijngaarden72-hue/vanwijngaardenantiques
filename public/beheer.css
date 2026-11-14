@@ -32,3 +32,4 @@ h3{font:600 18px "Hanken Grotesk",sans-serif;margin:0}
 .controle .mis{color:#a3201c}
 [hidden]{display:none!important}
 details{border:1px solid var(--lijn);border-radius:6px;padding:10px 12px}details>*+*{margin-top:10px}summary{cursor:pointer;font-weight:600;font-size:14px}
+.kopie{display:flex;gap:8px;align-items:flex-start;margin-top:4px}.kopie input,.kopie textarea{margin:0;flex:1}.kopie .k{flex:none}
